@@ -1,5 +1,6 @@
 package com.example.bundesland
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editText: EditText
     private lateinit var button: Button
     private lateinit var buttonAnswer : Button
+    private lateinit var buttonKarte : Button
 
     private val pairs = listOf(
         Pair("Baden-Württemberg", "Stuttgart"),
@@ -36,10 +38,7 @@ class MainActivity : AppCompatActivity() {
         Pair("Thüringen", "Erfurt"),
         Pair("Stuttgart", "Baden-Württemberg"),
         Pair("München", "Bayern"),
-        Pair("Berlin", "Berlin"),
         Pair("Potsdam", "Brandenburg"),
-        Pair("Bremen", "Bremen"),
-        Pair("Hamburg", "Hamburg"),
         Pair("Wiesbaden", "Hessen"),
         Pair("Schwerin", "Mecklenburg-Vorpommern"),
         Pair("Hannover", "Niedersachsen"),
@@ -54,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private var currentPair: Pair<String, String>? = null
+    private var oldPair: Pair<String, String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         editText = findViewById(R.id.editText)
         button = findViewById(R.id.button)
         buttonAnswer = findViewById(R.id.loesungButton)
+        buttonKarte = findViewById(R.id.karteButton)
 
         showNewPair()
 
@@ -79,10 +80,22 @@ class MainActivity : AppCompatActivity() {
         buttonAnswer.setOnClickListener {
             getAnswer()
         }
+
+        buttonKarte.setOnClickListener {
+            val intent = Intent(this, Landkarte::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     private fun showNewPair() {
         currentPair = pairs.random()
+        if (currentPair == oldPair) {
+            showNewPair()
+        } else {
+            oldPair = currentPair
+        }
         textView.text = currentPair?.first
         editText.text.clear()
     }
