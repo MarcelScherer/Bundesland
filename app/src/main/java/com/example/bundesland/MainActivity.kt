@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var button: Button
     private lateinit var buttonAnswer : Button
     private lateinit var buttonKarte : Button
+    private lateinit var buttonKarteBayern : Button
 
     private val pairs = listOf(
         Pair("Baden-Württemberg", "Stuttgart"),
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         button = findViewById(R.id.button)
         buttonAnswer = findViewById(R.id.loesungButton)
         buttonKarte = findViewById(R.id.karteButton)
+        buttonKarteBayern = findViewById(R.id.karte_bayern_Button)
 
         showNewPair()
 
@@ -83,6 +85,12 @@ class MainActivity : AppCompatActivity() {
 
         buttonKarte.setOnClickListener {
             val intent = Intent(this, Landkarte::class.java)
+            startActivity(intent)
+        }
+
+
+        buttonKarteBayern.setOnClickListener {
+            val intent = Intent(this, Bayern::class.java)
             startActivity(intent)
         }
 

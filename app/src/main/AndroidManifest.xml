@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Bundesland"
         tools:targetApi="31">
         <activity
+            android:name=".Bayern"
+            android:exported="false" />
+        <activity
             android:name=".Landkarte"
             android:exported="false"
             android:theme="@style/Theme.Bundesland" />
